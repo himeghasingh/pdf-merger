@@ -1,0 +1,178 @@
+/* Container to center content vertically and horizontally */
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* Drag and drop area */
+.drag-drop-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 200px;
+    border: 2px dashed #007bff;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    position: relative;
+    background-color: #f8f9fa;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: #007bff;
+}
+
+.drag-drop-area:hover {
+    background-color: #e9ecef;
+}
+
+/* Button container styling */
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Reset, submit, and download button styling */
+.reset-button, .submit-button, .download-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reset-button {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.reset-button:hover {
+    background-color: #e0a800;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.submit-button:disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+}
+
+.submit-button:hover:disabled {
+    background-color: #d6d6d6;
+}
+
+.download-button {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.download-button:disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+}
+
+/* .download-button:hover {
+    background-color: #218838;
+} */
+
+/* Preview container for showing file previews */
+.preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align previews */
+    gap: 10px;
+    width: 100%; /* Ensure the container fits within the viewport */
+}
+
+/* Wrapper for each preview */
+.preview-wrapper {
+    position: relative;
+    width: 160px;
+    text-align: center;
+}
+
+.preview-image {
+    width: 100%;
+    height: auto;
+    max-height: 120px;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.file-name {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.remove-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #ff0000;
+    color: #fff;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-button:hover {
+    background: #cc0000;
+}
+
+/* Blinking animation */
+@keyframes blink {
+    0% { opacity: 1; }
+    25% { opacity: 0.5; }
+    50% { opacity: 1; }
+    75% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    10% { opacity: 0.5; }
+    20% { opacity: 1; }
+    30% { opacity: 0.5; }
+    40% { opacity: 1; }
+    50% { opacity: 0.5; }
+    60% { opacity: 1; }
+    70% { opacity: 0.5; }
+    80% { opacity: 1; }
+    90% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.blink {
+    animation: blink 2s ease-in-out infinite;
+}
+
+.download-button:disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+    animation: none; /* Stop blinking when disabled */
+}
+
