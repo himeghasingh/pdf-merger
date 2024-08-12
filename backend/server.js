@@ -37,8 +37,11 @@ app.get('/', (req, res) => {
 // Route to handle file uploads and PDF merging
 app.post('/upload', upload.array('files'), async (req, res) => {
   try {
+    console.log('Files received:', req.files); // Log received files
+
     const pdfDocs = [];
     for (const file of req.files) {
+      console.log('Processing file:', file.path);
       const pdfDoc = await PDFDocument.load(fs.readFileSync(file.path));
       pdfDocs.push(pdfDoc);
     }
@@ -78,6 +81,7 @@ app.post('/upload', upload.array('files'), async (req, res) => {
     res.status(500).send('An error occurred while processing the PDF files.');
   }
 });
+
 
 // Start the server on specified port and host
 app.listen(port, '0.0.0.0', () => {
