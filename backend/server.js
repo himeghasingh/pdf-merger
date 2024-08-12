@@ -1,11 +1,11 @@
 require('dotenv').config();
 
-import express from 'express';
-import cors from 'cors';
-import multer from 'multer';
-import { PDFDocument } from 'pdf-lib';
-import { existsSync, mkdirSync, readFileSync, writeFileSync, unlinkSync } from 'fs';
-import path from 'path';
+const express = require('express');
+const cors = require('cors');
+const multer = require('multer');
+const { PDFDocument } = require('pdf-lib');
+const fs = require('fs');
+const path = require('path');
 
 // Create express app
 const app = express();
@@ -18,8 +18,8 @@ app.use(cors());
 
 // Create uploads directory if it doesn't exist
 const uploadDir = process.env.UPLOAD_DIR || 'uploads/';
-if (!existsSync(uploadDir)) {
-  mkdirSync(uploadDir);
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
 }
 
 // Configure multer for file uploads
@@ -35,7 +35,7 @@ app.post('/upload', upload.array('files'), async (req, res) => {
   try {
     const pdfDocs = [];
     for (const file of req.files) {
-      const pdfDoc = await PDFDocument.load(readFileSync(file.path));
+      const pdfDoc = await PDFDocument.load(fs.readFileSync(file.path));
       pdfDocs.push(pdfDoc);
     }
 
@@ -56,7 +56,7 @@ app.post('/upload', upload.array('files'), async (req, res) => {
 
     // Save the merged PDF for inspection (optional)
     try {
-      writeFileSync('merged.pdf', mergedPdfBytes);
+      fs.writeFileSync('merged.pdf', mergedPdfBytes);
       console.log('Merged PDF saved successfully.');
     } catch (err) {
       console.error('Error saving PDF file:', err);
@@ -68,7 +68,7 @@ app.post('/upload', upload.array('files'), async (req, res) => {
     res.send(Buffer.from(mergedPdfBytes));
 
     // Clean up uploaded files
-    req.files.forEach(file => unlinkSync(file.path));
+    req.files.forEach(file => fs.unlinkSync(file.path));
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('An error occurred while processing the PDF files.');
