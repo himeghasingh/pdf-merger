@@ -85,7 +85,8 @@ const FileUpload = () => {
     });
 
     try {
-        const response = await axios.post('http://18.219.247.101:5001/upload', formData, {
+        const apiUrl = 'https://pdf-merge-alb-1685323354.us-east-2.elb.amazonaws.com/upload';
+        const response = await axios.post(apiUrl, formData, {
             responseType: 'blob',
         });
 
