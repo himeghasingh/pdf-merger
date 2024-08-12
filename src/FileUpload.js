@@ -85,7 +85,7 @@ const FileUpload = () => {
     });
 
     try {
-        const response = await axios.post('http://localhost:5001/upload', formData, {
+        const response = await axios.post('http://18.219.247.101:5001/upload', formData, {
             responseType: 'blob',
         });
 

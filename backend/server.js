@@ -14,7 +14,11 @@ const app = express();
 const port = process.env.PORT || 5001;
 
 // Enable CORS
-app.use(cors());
+app.use(cors({
+  origin: 'https://pdf-fusion.netlify.app', // Your Netlify frontend URL
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}));
 
 // Create uploads directory if it doesn't exist
 const uploadDir = process.env.UPLOAD_DIR || 'uploads/';
@@ -79,3 +83,5 @@ app.post('/upload', upload.array('files'), async (req, res) => {
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on http://0.0.0.0:${port}`);
 });
+
+
