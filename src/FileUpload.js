@@ -181,28 +181,29 @@ const handleDownload = () => {
               {...provided.droppableProps}
             >
               {previews.map((preview, index) => (
-                <Draggable key={preview.file.name} draggableId={preview.file.name} index={index}>
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      className="preview-wrapper"
-                    >
-                      <img src={preview.imgURL} alt={`Preview ${index + 1}`} className="preview-image" />
-                      <div
-                        className="file-name"
-                        data-fullname={preview.file.name}
-                      >
-                        {preview.file.name.length > 15 ? `${preview.file.name.slice(0, 15)}...` : preview.file.name}
-                      </div>
-                      <button className="remove-button" onClick={() => handleRemoveFile(index)}>
-                        &times;
-                      </button>
-                    </div>
-                  )}
-                </Draggable>
-              ))}
+  <Draggable key={`${preview.file.name}-${index}`} draggableId={`${preview.file.name}-${index}`} index={index}>
+    {(provided) => (
+      <div
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        className="preview-wrapper"
+      >
+        <img src={preview.imgURL} alt={`Preview ${index + 1}`} className="preview-image" />
+        <div
+          className="file-name"
+          data-fullname={preview.file.name}
+        >
+          {preview.file.name.length > 15 ? `${preview.file.name.slice(0, 15)}...` : preview.file.name}
+        </div>
+        <button className="remove-button" onClick={() => handleRemoveFile(index)}>
+          &times;
+        </button>
+      </div>
+    )}
+  </Draggable>
+))}
+
               {provided.placeholder}
             </div>
           )}
